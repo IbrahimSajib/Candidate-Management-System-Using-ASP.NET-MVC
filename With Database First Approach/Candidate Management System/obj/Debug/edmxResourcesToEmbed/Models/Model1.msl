@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CMSModelStoreContainer" CdmEntityContainer="MyDbContext">
+    <EntitySetMapping Name="Candidates">
+      <EntityTypeMapping TypeName="CMSModel.Candidate">
+        <MappingFragment StoreEntitySet="Candidates">
+          <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+          <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Fresher" ColumnName="Fresher" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CandidateSkills">
+      <EntityTypeMapping TypeName="CMSModel.CandidateSkill">
+        <MappingFragment StoreEntitySet="CandidateSkills">
+          <ScalarProperty Name="CandidateSkillId" ColumnName="CandidateSkillId" />
+          <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+          <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Skills">
+      <EntityTypeMapping TypeName="CMSModel.Skill">
+        <MappingFragment StoreEntitySet="Skills">
+          <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+          <ScalarProperty Name="SkillName" ColumnName="SkillName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

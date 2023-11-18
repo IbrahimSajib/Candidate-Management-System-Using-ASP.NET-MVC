@@ -1,0 +1,29 @@
+USE Master
+GO
+CREATE DATABASE CMS
+GO
+USE CMS
+GO
+CREATE TABLE Skills
+(
+    SkillId INT IDENTITY PRIMARY KEY NOT NULL,
+    SkillName NVARCHAR (30) NOT NULL
+)
+GO
+CREATE TABLE Candidates 
+(
+    CandidateId INT IDENTITY PRIMARY KEY NOT NULL,
+    CandidateName NVARCHAR(50) NOT NULL,
+    DateOfBirth DATE NOT NULL,
+    Phone NVARCHAR(30) NOT NULL,
+    [Image] NVARCHAR (MAX) NULL,
+    Fresher BIT NOT NULL
+)
+GO
+CREATE TABLE CandidateSkills 
+(
+    CandidateSkillId INT IDENTITY PRIMARY KEY NOT NULL,
+    CandidateId INT NOT NULL REFERENCES Candidates(CandidateId),
+    SkillId INT NOT NULL REFERENCES Skills(SkillId),
+)
+GO

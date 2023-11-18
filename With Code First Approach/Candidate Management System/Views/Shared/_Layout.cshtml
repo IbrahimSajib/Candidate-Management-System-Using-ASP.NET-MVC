@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Candidate Management System</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <style>
+        .page-link.active, .active > .page-link {
+            background-color: green;
+            border-color: green;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark" style="background: #0c811a">
+        <div class="container-fluid px-5">
+            @Html.ActionLink("Candidate Management System", "Index", "Candidates", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li>@Html.ActionLink("Candidates", "Index", "Candidates", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Skills", "Index", "Skills", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid px-5 body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Candidate Management System</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @RenderSection("scripts", required: false)
+
+<script type="text/javascript">
+    $("#btnPlus").click(function (e) {
+        e.preventDefault();
+        var skillContainer = $("#skillContainer");
+        $.ajax({
+            url: "/Candidates/AddNewSkill",
+            type: "GET",
+            success: function (data) {
+                skillContainer.append(data);
+            }
+        });
+    });
+    $(document).on("click", "#btnDeleteSkill", function (e) {
+        e.preventDefault();
+        $(this).parent().parent().remove();
+    })
+</script>
+</body>
+</html>

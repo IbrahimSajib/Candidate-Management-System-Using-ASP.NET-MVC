@@ -1,0 +1,103 @@
+﻿@model Candidate_Management_System.ViewModels.CandidateVM
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 class="alert alert-warning text-center">Update Candidate Data</h2>
+@using (Html.BeginForm("Edit", "Candidates", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken();
+    @Html.HiddenFor(x => x.CandidateId)
+    @Html.HiddenFor(x => x.Image)
+    <div class="row">
+        <div class="col-7">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3>Candidate Information</h3>
+                </div>
+                <div class="card-body">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row mb-2">
+                        <div class="col-3">
+                            @Html.LabelFor(x => x.CandidateName, htmlAttributes: new { @class = "col-form-label" })
+                        </div>
+                        <div class="col-5">
+                            @Html.TextBoxFor(x => x.CandidateName, new { @class = "form-control" })
+                        </div>
+                        <div class="col-4">
+                            @Html.ValidationMessageFor(x => x.CandidateName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        @Html.LabelFor(x => x.DateOfBirth, htmlAttributes: new { @class = "col-form-label col-3" })
+                        <div class="col-5">
+                            @Html.EditorFor(x => x.DateOfBirth, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                        </div>
+                        <div class="col-4">
+                            @Html.ValidationMessageFor(x => x.DateOfBirth, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        @Html.LabelFor(x => x.Phone, htmlAttributes: new { @class = "col-form-label col-3" })
+                        <div class="col-5">
+                            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+                        </div>
+                        <div class="col-4">
+                            @Html.ValidationMessageFor(x => x.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        @Html.LabelFor(x => x.ImageFile, htmlAttributes: new { @class = "col-form-label col-3" })
+                        <div class="col-5">
+                            @Html.TextBoxFor(x => x.ImageFile, new { @class = "form-control", type = "file" })
+                        </div>
+                        <div class="col-4">
+                            @Html.ValidationMessageFor(x => x.ImageFile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        @Html.LabelFor(X => X.Fresher, htmlAttributes: new { @class = "col-form-label col-3" })
+                        <div class="col-5">
+                            @Html.CheckBoxFor(x => x.Fresher)
+                        </div>
+                        <div class="col-4">
+                            @Html.ValidationMessageFor(x => x.Fresher, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-5">
+            <div class="card" style="min-height:355px">
+                <div class="card-header text-center">
+                    <h3>Select Skill</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-end mb-3 me-5">
+                        <a href="#" id="btnPlus" class="btn btn-warning" style="margin-right: 2px;"><i class="fa fa-plus"></i> Add New</a>
+                    </div>
+                    <div id="skillContainer">
+                        @foreach (var item in Model.SkillList)
+                        {
+                            @Html.Action("AddNewSkill", "Candidates", new { id = item })
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end mt-3 me-2">
+            <input type="submit" value="Update Data" class="btn btn-success btn-lg" />
+        </div>
+
+    </div>
+
+}
+
+<div class="card-footer">
+    <div class="d-flex justify-content-start">
+        <a href="@Url.Action("Index")" class="btn btn-link btn-sm text-decoration-none"><i class="fa fa-arrow-circle-left"></i> Back to List</a>
+    </div>
+</div>
+
